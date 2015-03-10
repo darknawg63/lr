@@ -1,6 +1,5 @@
 <?php
 include 'core/init.php';
-include 'includes/overall/header.php';
 
 if(empty($_POST) === false) {
 	$username = $_POST['username'];
@@ -22,9 +21,16 @@ if(empty($_POST) === false) {
 			exit();
 		}
 	}
-	
-	print_r($errors);
-}
 
+} else {
+	$errors[] = 'No data received.';
+}
+include 'includes/overall/header.php';
+if(empty($errors) === false) {
+?>
+	<h2>We tried to log you in, but...</h2>
+<?php
+	echo output_errors($errors);
+}
 include 'includes/overall/footer.php';
 ?>
