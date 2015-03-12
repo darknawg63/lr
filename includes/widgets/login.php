@@ -18,5 +18,6 @@
 					<a href="register.php">Register</a>
 				</li>
 			</ul>
+		</form>
     </div>
 </div>
