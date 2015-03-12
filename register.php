@@ -12,7 +12,7 @@ if(empty($_POST) === false) {
 				);
 	foreach($_POST as $key=>$value) {
 		if(empty($value) && in_array($key, $required_fields) === true) {
-			$errors[] = 'Fields marked with an asterisk are required';
+			$errors[] = 'Fields marked with an asterisk are required.';
 			break 1;
 		}
 	}
@@ -20,6 +20,15 @@ if(empty($_POST) === false) {
 	if(empty($errors) === true) {
 		if(user_exists($_POST['username']) === true) {
 			$errors[] = 'Sorry, the username \'' . htmlentities($_POST['username']) . '\' is already taken.';
+		}
+		if(preg_match("/\\s/", $_POST['username']) == true) {
+			$errors[] = 'Your username must not contain any spaces.';
+		}
+		if(strlen($_POST['password']) < 6 ) {
+			$errors[] = 'Your password must be a least 6 characters.';
+		}
+		if($_POST['password'] !== $_POST['password_again']) {
+			$errors[] = 'Your passwords do not match.';
 		}
 	}
 }
