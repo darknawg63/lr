@@ -30,6 +30,12 @@ if(empty($_POST) === false) {
 		if($_POST['password'] !== $_POST['password_again']) {
 			$errors[] = 'Your passwords do not match.';
 		}
+		if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) === false) {
+			$errors[] = 'A valid email address is required.';
+		}
+		if(email_exists($_POST['email']) === true) {
+			$errors[] = 'Sorry, the email \'' . htmlentities($_POST['email']) . '\' is already in use.';
+		}
 	}
 }
 
