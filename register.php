@@ -39,9 +39,16 @@ if(empty($_POST) === false) {
 	}
 }
 
-print_r($errors);
 ?>
 <h1>Register</h1>
+
+<?php
+if(empty($_POST) === true && empty($errors) === true) {
+	// register user
+} else {
+	echo output_errors($errors);
+}
+?>
 
 <form action="register.php" method="post">
 	<ul>
