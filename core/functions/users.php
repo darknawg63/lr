@@ -6,7 +6,7 @@ function register_user($register_data) {
 	$fields = '`' . implode('`, `', array_keys($register_data)) . '`';
 	$data = '\'' . implode('\', \'', $register_data) . '\'';
 	
-	mysql_query("");
+	mysql_query("INSERT INTO `users` ($fields) VALUES ($data)");
 }
 
 function user_count() {

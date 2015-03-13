@@ -43,54 +43,60 @@ if(empty($_POST) === false) {
 <h1>Register</h1>
 
 <?php
-if(empty($_POST) === false && empty($errors) === true) {
-	$register_data = array(
-		'username'   => $_POST['username'],
-		'password'   => $_POST['password'],
-		'first_name' => $_POST['first_name'],
-		'last_name'  => $_POST['last_name'],
-		'email'      => $_POST['email']
-	);
-	
-	register_user($register_data);
-	// redirect
-	// exit
-	
-} else if(empty($errors) === false){
-	echo output_errors($errors);
-}
+if(isset($_GET['success']) && empty($_GET['success'])) {
+	echo 'You\'ve been registered successfully!';
+} else {
+	if(empty($_POST) === false && empty($errors) === true) {
+		$register_data = array(
+			'username'   => $_POST['username'],
+			'password'   => $_POST['password'],
+			'first_name' => $_POST['first_name'],
+			'last_name'  => $_POST['last_name'],
+			'email'      => $_POST['email']
+		);
+		
+		register_user($register_data);
+		header('Location: register.php?success');
+		exit();
+		
+	} else if(empty($errors) === false){
+		echo output_errors($errors);
+	}
+
 ?>
 
-<form action="register.php" method="post">
-	<ul>
-		<li>
-			Username*:<br>
-			<input type="text" name="username">
-		</li>
-		<li>
-			Password*:<br>
-			<input type="password" name="password">
-		</li>
-		<li>
-			Password again*:<br>
-			<input type="password" name="password_again">
-		</li>
-		<li>
-			First name*:<br>
-			<input type="text" name="first_name">
-		</li>
-		<li>
-			Last name:<br>
-			<input type="text" name="last_name">
-		</li>
+	<form action="register.php" method="post">
+		<ul>
 			<li>
-			Email*:<br>
-			<input type="text" name="email">
-		</li>
-		<li>
-			<input type="submit" value="Register">
-		</li>
-	</ul>
-</form>
+				Username*:<br>
+				<input type="text" name="username">
+			</li>
+			<li>
+				Password*:<br>
+				<input type="password" name="password">
+			</li>
+			<li>
+				Password again*:<br>
+				<input type="password" name="password_again">
+			</li>
+			<li>
+				First name*:<br>
+				<input type="text" name="first_name">
+			</li>
+			<li>
+				Last name:<br>
+				<input type="text" name="last_name">
+			</li>
+				<li>
+				Email*:<br>
+				<input type="text" name="email">
+			</li>
+			<li>
+				<input type="submit" value="Register">
+			</li>
+		</ul>
+	</form>
 
-<?php include 'includes/overall/footer.php'; ?>
+<?php 
+}
+include 'includes/overall/footer.php'; ?>
