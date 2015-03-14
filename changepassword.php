@@ -31,31 +31,39 @@ include 'includes/overall/header.php';
 <h1>Change Password</h1>
 
 <?php 
-if(empty($_POST) === false && empty($errors) ===true) {
-	
-} else if(empty($errors) === false) {
-	echo output_errors($errors);
-}
-?>
+if(isset($_GET['success']) && empty($_GET['success'])) {
+	echo 'Your password has been changed.';
+} else {
 
-<form action="" method="post">
-	<ul>
-		<li>
-			Current password*:<br>
-			<input type="text" name="current_password">
-		</li>
-		<li>
-			New password*:<br>
-			<input type="password" name="password">
-		</li>
-		<li>
-			New password again*:<br>
-			<input type="password" name="password_again">
-		</li>
-		<li>
-			<input type="submit" value="Change password">
-		</li>
-	</ul>
+	if(empty($_POST) === false && empty($errors) ===true) {
+		change_password($user_session_id, $_POST['password']);
+		header('Location: changepassword.php?success');
+	} else if(empty($errors) === false) {
+		echo output_errors($errors);
+	}
+	?>
+
+	<form action="" method="post">
+		<ul>
+			<li>
+				Current password*:<br>
+				<input type="password" name="current_password">
+			</li>
+			<li>
+				New password*:<br>
+				<input type="password" name="password">
+			</li>
+			<li>
+				New password again*:<br>
+				<input type="password" name="password_again">
+			</li>
+			<li>
+				<input type="submit" value="Change password">
+			</li>
+		</ul>
 </form>
 
-<?php include 'includes/overall/footer.php';
+<?php
+}
+include 'includes/overall/footer.php';
+?>
