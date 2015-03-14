@@ -16,19 +16,27 @@ if(empty($_POST) === false) {
 	}
 	
 	if(md5($_POST['current_password']) === $user_data['password']) {
-		if() {
-			
+		if(trim($_POST['password']) !== trim($_POST['password_again'])) {
+			$errors[] = 'Your new passwords do not match.';
+		} else if(strlen($_POST['password']) < 6) {
+			$errors[] = 'Your passwords must be at least 6 characters.';
 		}
 	} else {
 		$errors[] = 'Your current password is incorrect.';
 	}
-	
-	print_r($errors);
 }
 
 include 'includes/overall/header.php';
 ?>
 <h1>Change Password</h1>
+
+<?php 
+if(empty($_POST) === false && empty($errors) ===true) {
+	
+} else if(empty($errors) === false) {
+	echo output_errors($errors);
+}
+?>
 
 <form action="" method="post">
 	<ul>
@@ -38,11 +46,11 @@ include 'includes/overall/header.php';
 		</li>
 		<li>
 			New password*:<br>
-			<input type="text" name="password">
+			<input type="password" name="password">
 		</li>
 		<li>
 			New password again*:<br>
-			<input type="text" name="password_again">
+			<input type="password" name="password_again">
 		</li>
 		<li>
 			<input type="submit" value="Change password">
