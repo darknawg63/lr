@@ -1,4 +1,17 @@
 <?php
+function activate($email, $email_code) {
+	$email 		= mysql_real_escape_string($email);
+	$email_code = mysql_real_escape_string($email_code);
+	
+	if(mysql_result(mysql_query("SELECT COUNT(`user_id`) FROM `users` WHERE `email` = '$email' AND `active` = 0"), 0) == 1) {
+		mysql_query("UPDATE `users` SET `active` = 1 WHERE `email` = '$email'");
+		
+		return true;
+	} else {
+		return false;
+	}
+}
+
 function change_password($user_id, $password) {
 	$user_id = (int)$user_id;
 	$password = md5($password);
