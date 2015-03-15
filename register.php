@@ -17,7 +17,6 @@ if(empty($_POST) === false) {
 			break 1;
 		}
 	}
-}
 	
 	if(empty($errors) === true) {
 		if(user_exists($_POST['username']) === true) {
