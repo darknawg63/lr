@@ -10,12 +10,16 @@ function recover($mode,$email) {
 	} else if($mode == 'password') {
 		$generated_password = substr(md5(rand(999, 999999)), 0, 8);
 		change_password($user_data['user_id'], $generated_password);
+		
+		update_user($user_data['user_id'], array('password_recover' => '1'));
+		
 		email($email, 'Your password recovery', "Hello " . $user_data['first_name'] . ",\n\nYour new password is: " . $generated_password . "\n\n-phpacademy");
+
 	}
 }
 
-function update_user($update_data) {
-	global $session_user_id;
+function update_user($user_id, $update_data) {
+
 	$update = array();
 	array_walk($update_data, 'array_sanitize');
 	
@@ -23,7 +27,7 @@ function update_user($update_data) {
 		$update[] = '`' . $field . '` =\'' . $data . '\'';
 	}
 	
-	mysql_query("UPDATE `users` SET " . implode(',', $update) . "WHERE `user_id` = $session_user_id");
+	mysql_query("UPDATE `users` SET " . implode(',', $update) . "WHERE `user_id` = $user_id");
 }
 
 function activate($email, $email_code) {

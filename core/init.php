@@ -13,7 +13,11 @@ if(logged_in() === true) {
 	if(user_active($user_data['username']) === false) {
 		session_destroy();
 		header('Location: index.php');
-		
+		exit();
+	}
+	if() {
+		header('Location: changepassword.php');
+		exit();
 	}
 }
 
