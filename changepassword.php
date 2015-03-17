@@ -34,6 +34,12 @@ include 'includes/overall/header.php';
 if(isset($_GET['success']) && empty($_GET['success'])) {
 	echo 'Your password has been changed.';
 } else {
+	
+	if (isset($_GET['force']) === true && empty($_GET['force']) === true) {
+	?>
+		<p>You must change your password now that you've recovered.</p>
+	<?php
+	}
 
 	if(empty($_POST) === false && empty($errors) ===true) {
 		change_password($user_session_id, $_POST['password']);
