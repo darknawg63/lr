@@ -1,4 +1,17 @@
 <?php
+function recover($mode,$email) {
+	$mode 	= sanitize($mode);
+	$email 	= sanitize($email);
+	
+	$user_data = user_data(user_id_from_email($email), 'first_name', 'username');
+	
+	if($mode == 'username') {
+		email($email, 'Your username', "Hello " . $user_data['first_name'] . ",\n\nYour username is: " . $user_data['username'] . "\n\n-phpacademy");
+	} else if($mode == 'password') {
+		//recover password
+	}
+}
+
 function update_user($update_data) {
 	global $session_user_id;
 	$update = array();
@@ -95,6 +108,12 @@ function user_id_from_username($username) {
 	return mysql_result($query, 0, 'user_id');
 }
 
+function user_id_from_email($email) {
+	$email = sanitize($email);
+	$query = mysql_query("SELECT `user_id` FROM `users` WHERE `email` = '$email'");
+	
+	return mysql_result($query, 0, 'user_id');
+}
 
 function login($username, $password) {
 	$user_id = user_id_from_username($username);
