@@ -21,7 +21,7 @@ function admin_protect() {
 	global $user_data;
 	
 	// We don't want type checking because our query returns a string.
-	if(is_admin($user_data['user_id']) === false) {
+	if(has_access($user_data['user_id'], 1) === false) {
 		header('Location: index.php');
 		exit();
 	}

@@ -6,8 +6,10 @@ include 'includes/overall/header.php';
 <p>Just a template.</p>
 
 <?php
-if(is_admin($session_user_id) === true) {
+if(has_access($session_user_id, 1) === true) {
 	echo 'Admin!';
+} else if(has_access($session_user_id, 2) === true) {
+	echo 'Moderator!';
 }
 ?>
 
