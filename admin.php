@@ -1,14 +1,10 @@
 <?php
 include 'core/init.php';
+protect_page();
+admin_protect();
 include 'includes/overall/header.php';
 ?>
-<h1>Home</h1>
-<p>Just a template.</p>
-
-<?php
-if(is_admin($session_user_id) === true) {
-	echo 'Admin!';
-}
-?>
+<h1>Admin</h1>
+<p>Admin page</p>
 
 <?php include 'includes/overall/footer.php'; ?>

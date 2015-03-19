@@ -17,6 +17,16 @@ function protect_page() {
 	}
 }
 
+function admin_protect() {
+	global $user_data;
+	
+	// We don't want type checking because our query returns a string.
+	if(is_admin($user_data['user_id']) === false) {
+		header('Location: index.php');
+		exit();
+	}
+}
+
 function array_sanitize(&$item) {
 	$item = htmlentities(mysql_real_escape_string($item));
 }

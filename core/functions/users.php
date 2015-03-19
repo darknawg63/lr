@@ -1,4 +1,9 @@
 <?php
+function is_admin($user_id) {
+	$user_id = (int)$user_id;
+	return (mysql_result(mysql_query("SELECT COUNT(`user_id`) FROM `users` WHERE `user_id` = $user_id AND `type` = 1"), 0) == 1) ? true : false;
+}
+
 function recover($mode,$email) {
 	$mode 	= sanitize($mode);
 	$email 	= sanitize($email);
@@ -58,7 +63,9 @@ function register_user($register_data) {
 	$data = '\'' . implode('\', \'', $register_data) . '\'';
 	
 	mysql_query("INSERT INTO `users` ($fields) VALUES ($data)");
-	email($register_data['email'], 'Activate your account', "Hello " . $register_data['first_name'] .",\n\nYou need to activate your account, so use the link below:\n\nhttp://localhost/~Black/lr/activate.php?email=" . $register_data['email'] ."&email_code=" . $register_data['email_code'] . "\n\n- phpacademy");
+	email($register_data['email'], 'Activate your account', "Hello " . $register_data['first_name'] .
+	",\n\nYou need to activate your account, so use the link below:\n\nhttp://localhost/~Black/lr/activate.php?email=" . 
+	$register_data['email'] ."&email_code=" . $register_data['email_code'] . "\n\n- phpacademy");
 }
 
 function user_count() {
