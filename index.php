@@ -6,6 +6,7 @@ include 'includes/overall/header.php';
 <p>Just a template.</p>
 
 <?php
+global $session_user_id;
 if(has_access($session_user_id, 1) === true) {
 	echo 'Admin!';
 } else if(has_access($session_user_id, 2) === true) {
