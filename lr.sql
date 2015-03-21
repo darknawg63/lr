@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 20, 2015 at 08:45 PM
+-- Generation Time: Mar 22, 2015 at 02:47 PM
 -- Server version: 5.6.21-log
 -- PHP Version: 5.6.5
 
@@ -28,7 +28,6 @@ USE `lr`;
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int(11) NOT NULL,
   `username` varchar(32) NOT NULL,
@@ -40,18 +39,19 @@ CREATE TABLE IF NOT EXISTS `users` (
   `active` int(1) NOT NULL DEFAULT '0',
   `password_recover` int(1) DEFAULT '0',
   `type` int(1) NOT NULL DEFAULT '0',
-  `allow_email` int(2) NOT NULL DEFAULT '1'
+  `allow_email` int(2) NOT NULL DEFAULT '1',
+  `profile` varchar(55) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `password`, `first_name`, `last_name`, `email`, `email_code`, `active`, `password_recover`, `type`, `allow_email`) VALUES
-(1, 'billy', '5f4dcc3b5aa765d61d8327deb882cf99', 'Billy', 'Garrett', 'billy@phpacademy.org', '4acc8334b6269c840077fd9c96e1130d', 1, 0, 2, 0),
-(2, 'alex', '5f4dcc3b5aa765d61d8327deb882cf99', 'Alex', 'Garrett', 'alex@phpacademy.org', '1b31361daf285660f870e94346696341', 1, 0, 1, 0),
-(3, 'ashley', '5f4dcc3b5aa765d61d8327deb882cf99', 'Ashley', 'Garrett', 'ashley@phpacademy.org', '12a59beefb4d902ca3ee691709837508', 1, 0, 0, 1),
-(4, 'dale', '5f4dcc3b5aa765d61d8327deb882cf99', 'Dale', 'Garrett', 'dale@phpacademy.org', '', 1, 0, 0, 1);
+INSERT INTO `users` (`user_id`, `username`, `password`, `first_name`, `last_name`, `email`, `email_code`, `active`, `password_recover`, `type`, `allow_email`, `profile`) VALUES
+(1, 'billy', '5f4dcc3b5aa765d61d8327deb882cf99', 'Billy', 'Garrett', 'billy@phpacademy.org', '4acc8334b6269c840077fd9c96e1130d', 1, 0, 2, 0, 'images/profile/a2f581d8cd.jpg'),
+(2, 'alex', '5f4dcc3b5aa765d61d8327deb882cf99', 'Alex', 'Garrett', 'alex@phpacademy.org', '1b31361daf285660f870e94346696341', 1, 0, 1, 0, ''),
+(3, 'ashley', '5f4dcc3b5aa765d61d8327deb882cf99', 'Ashley', 'Garrett', 'ashley@phpacademy.org', '12a59beefb4d902ca3ee691709837508', 1, 0, 0, 1, ''),
+(4, 'dale', '5f4dcc3b5aa765d61d8327deb882cf99', 'Dale', 'Garrett', 'dale@phpacademy.org', '', 1, 0, 0, 1, '');
 
 --
 -- Indexes for dumped tables
