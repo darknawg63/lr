@@ -15,7 +15,7 @@
 					$file_temp = $_FILES['profile']['tmp_name'];
 					
 					if(in_array($file_extn, $allowed) === true) {
-						change_profile_image($session_user_id, $file_temp);
+						change_profile_image($session_user_id, $file_temp, $file_extn);
 					} else {
 						echo 'Incorrect file type. Allowed: ';
 						echo implode(', ', $allowed);
